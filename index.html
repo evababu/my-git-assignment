@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Claw Ninja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="menuOverlay">
+    <div id="floatingCats"></div>
+
+    <div class="menuContent">
+      <h1>CLAW NINJA</h1>
+      <p class="subtitle">choose your cat</p>
+
+      <div id="mascotWrap">
+        <canvas id="mascotCanvas" width="70" height="55"></canvas>
+        <div id="catBubble"></div>
+      </div>
+
+      <div id="catGrid"></div>
+      <button id="startBtn" disabled>START</button>
+    </div>
+  </div>
+
+  <div id="gameOverOverlay" class="hidden">
+    <h1>GAME OVER</h1>
+    <p class="subtitle" id="finalScoreText"></p>
+    <button id="restartBtn">PLAY AGAIN</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

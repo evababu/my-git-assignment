@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Fredoka", sans-serif;
+}
+
+canvas#gameCanvas {
+  display: block;
+  background: linear-gradient(180deg, #ffe3ec 0%, #e0d4f7 45%, #d2f3ff 100%);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- OVERLAYS ---------- */
+
+#menuOverlay,
+#gameOverOverlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #ffe8f0 0%, #efe3ff 50%, #dff5ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a4a6a;
+  text-align: center;
+  overflow: hidden;
+}
+
+.menuContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+#gameOverOverlay {
+  flex-direction: column;
+  gap: 16px;
+}
+
+#menuOverlay h1,
+#gameOverOverlay h1 {
+  font-size: 52px;
+  font-weight: 700;
+  color: #ff7aa8;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255,122,168,0.25);
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: #8a76a8;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* ---------- MASCOT + SPEECH BUBBLE ---------- */
+
+#mascotWrap {
+  position: relative;
+  height: 90px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+#mascotCanvas {
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+#catBubble {
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #6a5a7a;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(150,120,180,0.25);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#catBubble::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px 7px 0 7px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+#catBubble.visible {
+  opacity: 1;
+}
+
+/* ---------- FLOATING BACKGROUND CATS ---------- */
+
+#floatingCats {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.floatingCat {
+  position: absolute;
+  animation-name: floatAround;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  opacity: 0.55;
+}
+
+@keyframes floatAround {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(22px, -18px) rotate(6deg); }
+  50%  { transform: translate(-12px, -32px) rotate(-5deg); }
+  75%  { transform: translate(-24px, -8px) rotate(4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ---------- CAT SELECT GRID ---------- */
+
+#catGrid {
+  display: flex;
+  gap: 14px;
+  margin: 6px 0;
+}
+
+.catCard {
+  background: #ffffffcc;
+  border: 3px solid #f3d9ff;
+  border-radius: 16px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.catCard:hover {
+  transform: translateY(-4px);
+}
+
+.catCard.selected {
+  border-color: #ff9ac2;
+  box-shadow: 0 4px 14px rgba(255,154,194,0.45);
+}
+
+.catCard canvas {
+  display: block;
+}
+
+.catCard span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #7a6a8a;
+}
+
+/* ---------- BUTTONS ---------- */
+
+#startBtn,
+#restartBtn {
+  padding: 13px 40px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff9ac2, #c9a6ff);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(200,140,220,0.4);
+  transition: transform 0.15s ease;
+}
+
+#startBtn:hover:not(:disabled),
+#restartBtn:hover {
+  transform: translateY(-2px);
+}
+
+#startBtn:disabled {
+  background: #e4d9ee;
+  color: #b3a6c2;
+  cursor: not-allowed;
+  box-shadow: none;
+}
