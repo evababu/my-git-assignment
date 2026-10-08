@@ -13,26 +13,32 @@ html, body {
 
 canvas#gameCanvas {
   display: block;
-  background: linear-gradient(180deg, #ffe3ec 0%, #e0d4f7 45%, #d2f3ff 100%);
+  background: #b8a5ff;
 }
 
 .hidden {
   display: none !important;
 }
 
-/* ---------- OVERLAYS ---------- */
+/* ---------- OVERLAYS (see-through so the animated background shows) ---------- */
 
 #menuOverlay,
 #gameOverOverlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(160deg, #ffe8f0 0%, #efe3ff 50%, #dff5ff 100%);
+  background: linear-gradient(160deg, rgba(255,232,240,0.40), rgba(239,227,255,0.30), rgba(223,245,255,0.40));
   display: flex;
   align-items: center;
   justify-content: center;
   color: #5a4a6a;
   text-align: center;
   overflow: hidden;
+}
+
+#gameOverOverlay {
+  flex-direction: column;
+  gap: 18px;
+  background: rgba(60, 30, 100, 0.45);
 }
 
 .menuContent {
@@ -42,26 +48,42 @@ canvas#gameCanvas {
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  padding: 24px 34px 30px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 20px 40px rgba(90, 50, 140, 0.25);
 }
 
-#gameOverOverlay {
-  flex-direction: column;
-  gap: 16px;
-}
+/* ---------- 3D TITLE ---------- */
 
 #menuOverlay h1,
 #gameOverOverlay h1 {
-  font-size: 52px;
+  font-size: 54px;
   font-weight: 700;
-  color: #ff7aa8;
-  text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255,122,168,0.25);
-  letter-spacing: 1px;
+  color: #ffe6f1;
+  letter-spacing: 2px;
+  text-shadow:
+    1px 1px 0 #e0558f,
+    2px 2px 0 #e0558f,
+    3px 3px 0 #d44c86,
+    4px 4px 0 #d44c86,
+    5px 5px 0 #c9437d,
+    6px 6px 0 #c9437d,
+    8px 14px 18px rgba(80, 30, 120, 0.4);
+  transform: perspective(500px) rotateX(14deg);
 }
 
 .subtitle {
-  color: #8a76a8;
+  color: #6f4f98;
   font-weight: 500;
   font-size: 15px;
+}
+
+#gameOverOverlay .subtitle {
+  color: #fff;
+  font-size: 22px;
 }
 
 /* ---------- MASCOT + SPEECH BUBBLE ---------- */
@@ -124,7 +146,7 @@ canvas#gameCanvas {
   animation-name: floatAround;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  opacity: 0.55;
+  opacity: 0.65;
 }
 
 @keyframes floatAround {
@@ -140,31 +162,35 @@ canvas#gameCanvas {
   50% { transform: translateY(-8px); }
 }
 
-/* ---------- CAT SELECT GRID ---------- */
+/* ---------- 3D CAT SELECT CARDS ---------- */
 
 #catGrid {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   margin: 6px 0;
+  perspective: 700px;
 }
 
 .catCard {
-  background: #ffffffcc;
+  background: rgba(255, 255, 255, 0.85);
   border: 3px solid #f3d9ff;
   border-radius: 16px;
   padding: 10px;
-  cursor: pointer;
   text-align: center;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transform-style: preserve-3d;
+  box-shadow: 0 8px 0 #d9b8f5, 0 16px 22px rgba(90, 50, 140, 0.25);
+  transition: transform 0.2s ease, border-color 0.15s ease, box-shadow 0.2s ease;
 }
 
 .catCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) rotateX(10deg) rotateY(-10deg);
+  box-shadow: 0 12px 0 #d9b8f5, 0 24px 28px rgba(90, 50, 140, 0.3);
 }
 
 .catCard.selected {
-  border-color: #ff9ac2;
-  box-shadow: 0 4px 14px rgba(255,154,194,0.45);
+  border-color: #ff7aa8;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 0 #ff9ac2, 0 16px 24px rgba(255, 122, 168, 0.45);
 }
 
 .catCard canvas {
@@ -179,21 +205,20 @@ canvas#gameCanvas {
   color: #7a6a8a;
 }
 
-/* ---------- BUTTONS ---------- */
+/* ---------- 3D BUTTONS ---------- */
 
 #startBtn,
 #restartBtn {
-  padding: 13px 40px;
+  padding: 13px 44px;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #fff;
   background: linear-gradient(135deg, #ff9ac2, #c9a6ff);
   border: none;
   border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 6px 14px rgba(200,140,220,0.4);
-  transition: transform 0.15s ease;
+  box-shadow: 0 6px 0 #a56ad6, 0 12px 20px rgba(120, 70, 180, 0.35);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 #startBtn:hover:not(:disabled),
@@ -201,9 +226,24 @@ canvas#gameCanvas {
   transform: translateY(-2px);
 }
 
+#startBtn:active:not(:disabled),
+#restartBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #a56ad6, 0 4px 10px rgba(120, 70, 180, 0.35);
+}
+
 #startBtn:disabled {
   background: #e4d9ee;
   color: #b3a6c2;
+  box-shadow: 0 6px 0 #cdbfdc;
+}
+
+/* ---------- CAT CURSOR (set from game.js when you pick a cat) ---------- */
+
+html, body, canvas#gameCanvas, #menuOverlay, #gameOverOverlay, button, .catCard {
+  cursor: var(--cat-cursor, auto);
+}
+
+#startBtn:disabled {
   cursor: not-allowed;
-  box-shadow: none;
 }
