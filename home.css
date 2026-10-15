@@ -1,0 +1,61 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: system-ui, sans-serif; color: #eee;
+  background: #000 url('assest/cat-castle-night.svg') center / cover no-repeat fixed;
+}
+body::before {            /* dark overlay so text is readable */
+  content: ""; position: fixed; inset: 0; z-index: 0;
+  background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.25) 50%, rgba(0,0,0,.7));
+}
+
+/* twinkling stars */
+.stars {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 25% 60%, #fff, transparent),
+    radial-gradient(2px 2px at 40% 15%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 55% 40%, #fff, transparent),
+    radial-gradient(2px 2px at 70% 25%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 85% 55%, #fff, transparent),
+    radial-gradient(2px 2px at 92% 12%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 15% 80%, #fff, transparent);
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .3; } to { opacity: 1; } }
+
+.welcome {
+  position: relative; z-index: 2; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 8vh 16px 0; text-align: center;
+}
+.eyebrow { letter-spacing: .4em; font-size: .85rem; color: #aaa; margin: 0; }
+h1 {
+  font-size: clamp(2.5rem, 9vw, 6rem); margin: .1em 0; letter-spacing: .08em;
+  text-shadow: 0 0 25px rgba(255,255,255,.4);
+}
+.subtitle { max-width: 480px; color: #ccc; line-height: 1.6; }
+
+.battlefield { display: flex; align-items: center; gap: 12px; font-size: clamp(2rem, 7vw, 3.5rem); margin: 18px 0 28px; }
+.knight-left  { animation: lunge-l 1.2s ease-in-out infinite; }
+.knight-right { animation: lunge-r 1.2s ease-in-out infinite; }
+.clash { color: #ffd84a; animation: spark 1.2s ease-in-out infinite; }
+@keyframes lunge-l { 50% { transform: translateX(14px); } }
+@keyframes lunge-r { 50% { transform: translateX(-14px); } }
+@keyframes spark { 0%,100% { opacity: .2; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.5); } }
+
+.start-button {
+  display: inline-block; padding: 16px 44px; font-size: 1.4rem; font-weight: bold;
+  color: #fff; text-decoration: none; letter-spacing: .1em;
+  background: linear-gradient(#5a5a66, #2c2c34); border: 2px solid #9a9aa8; border-radius: 14px;
+  box-shadow: 0 6px 0 #15151a, 0 0 25px rgba(255,255,255,.2); transition: transform .1s;
+}
+.start-button:hover { background: linear-gradient(#70707e, #3a3a44); }
+.start-button:active { transform: translateY(4px); }
+.hint { color: #999; margin-top: 18px; }
+
+.ground-fog {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 22vh; z-index: 1; pointer-events: none;
+  background: linear-gradient(transparent, rgba(150,150,160,.22));
+}
