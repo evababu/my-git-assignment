@@ -1,38 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Claw Ninja</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Warriors | Enter the Kingdom</title>
+  <link rel="stylesheet" href="home.css">
 </head>
+
 <body>
-  <canvas id="gameCanvas"></canvas>
+  <div class="stars" aria-hidden="true"></div>
 
-  <div id="menuOverlay">
-    <div id="floatingCats"></div>
+  <main class="welcome">
+    <p class="eyebrow">THE KINGDOM AWAITS</p>
 
-    <div class="menuContent">
-      <h1>CLAW NINJA</h1>
-      <p class="subtitle">choose your cat</p>
+    <h1>CAT WARRIORS</h1>
 
-      <div id="mascotWrap">
-        <canvas id="mascotCanvas" width="70" height="55"></canvas>
-        <div id="catBubble"></div>
-      </div>
+    <p class="subtitle">
+      Enter the kingdom. Sharpen your blades.
+      Become a legend.
+    </p>
 
-      <div id="catGrid"></div>
-      <button id="startBtn" disabled>START</button>
+    <div class="battlefield" aria-label="Cat knights preparing for battle">
+      <span class="knight knight-left">🐱⚔️</span>
+      <span class="clash">✦</span>
+      <span class="knight knight-right">⚔️🐈‍⬛</span>
     </div>
-  </div>
 
-  <div id="gameOverOverlay" class="hidden">
-    <h1>GAME OVER</h1>
-    <p class="subtitle" id="finalScoreText"></p>
-    <button id="restartBtn">PLAY AGAIN</button>
-  </div>
+    <a class="start-button" href="shop.html">
+      START GAME <span>➜</span>
+    </a>
 
-  <script src="game.js"></script>
+    <p class="hint">Choose your weapons. Protect your kingdom.</p>
+  </main>
+
+  <div class="ground-fog" aria-hidden="true"></div>
 </body>
 </html>
